@@ -1,0 +1,32 @@
+default: &default
+  adapter: mysql2
+  # encoding: utf8
+  # pool: 5
+  # # host: 127.0.0.1
+  # socket: /tmp/mysqld.sock
+  username: root
+  password: root
+  #socket: /var/run/mysqld/mysqld.sock
+
+development:
+  primary:
+    <<: *default
+    database: hackerbyte_webapp_production
+
+test:
+  <<: *default
+  database: hackerbyte_webapp_production
+  username: root
+  password: root
+
+staging:
+  <<: *default
+  database: hackerbyte_webapp_production
+  username: root
+  password: root
+
+production:
+  <<: *default
+  database: hackerbyte_webapp_production
+  username: root
+  password: root
