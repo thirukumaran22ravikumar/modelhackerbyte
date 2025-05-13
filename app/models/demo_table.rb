@@ -1,0 +1,2 @@
+class DemoTable < ApplicationRecord
+end

@@ -31,6 +31,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+  Rails.application.routes.default_url_options[:host] = "http://localhost:3001"
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -63,6 +64,28 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "hackerbyte_production"
+
+
+
+  config.action_mailer.delivery_method = :smtp
+  # ActionMailer::Base.perform_deliveries = true
+  # ActionMailer::Base.raise_delivery_errors = true
+  
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: 'gmail.com',
+    user_name: 'thiruhealthguru22@gmail.com',
+    password: 'vlneuklzvkzfghdy',
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
+
+
+
+
+
+  
 
   config.action_mailer.perform_caching = false
 

@@ -1,0 +1,13 @@
+<h1>Hi <%= @user.username %>,</h1>
+
+<p>Welcome to the platform!</p>
+
+<p>Click the button below to set your password and access your dashboard:</p>
+
+<p>
+  <a href="<%= @set_password_url %>" style="padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+    Set Your Password
+  </a>
+</p>
+
+<p>This link will expire in a few hours for your security.</p>

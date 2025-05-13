@@ -1,23 +1,51 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
+  skip_before_action :authenticate_request, only: [:create]
+
 
   # POST /resource/sign_in
-  def create
-    # Find the user by email
-    resource = User.find_for_database_authentication(email: params[:email])
-    return invalid_login_attempt unless resource
+  # def create
+  #   # Find the user by email
+  #   resource = User.find_for_database_authentication(email: params[:email])
+  #   return invalid_login_attempt unless resource
 
-    # Check if the password is valid
-    if resource.valid_password?(params[:password])
-      # Sign in the user
-      sign_in(resource_name, resource)
-      render json: { user: {email:resource[:email],role: resource[:role],username: resource[:username]}, message: "Successfully logged in", status: :ok }
+  #   # Check if the password is valid
+  #   if resource.valid_password?(params[:password])
+  #     # Sign in the user
+  #     sign_in(resource_name, resource)
+  #     puts resource.inspect
+  #     render json: { user: {email:resource[:email],role: resource[:role],username: resource[:username],user_id: resource[:id] }, message: "Successfully logged in", status: :ok }
+  #   else
+  #     warden.custom_failure!
+  #     render json: { error: "Invalid email or password" }, status: :unauthorized
+  #   end
+  # end
+
+  def create
+    user = User.find_for_database_authentication(email: params[:email])
+    return invalid_login_attempt unless user
+
+    if user.valid_password?(params[:password])
+      sign_in(resource_name, user)
+      token = JsonWebToken.encode(user_id: user.id)
+
+      render json: {
+        token: token,
+        user: {
+          email: user.email,
+          role: user.role,
+          username: user.username,
+          user_id: user.id
+        },
+        message: "Successfully logged in"
+      }, status: :ok
     else
-      puts "Calling warden.custom_failure!"
       warden.custom_failure!
       render json: { error: "Invalid email or password" }, status: :unauthorized
     end
   end
+
+
 
 
 

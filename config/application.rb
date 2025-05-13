@@ -12,6 +12,8 @@ module Hackerbyte
     # Include necessary middleware for session management
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_your_app_session'
+    config.eager_load_paths << Rails.root.join('lib')
+
     
 
     # Configuration for the application, engines, and railties goes here.

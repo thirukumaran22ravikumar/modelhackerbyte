@@ -18,6 +18,9 @@ gem 'devise'
 gem 'jwt'
 # Gemfile
 gem 'bcrypt', '~> 3.1.7'
+gem 'rest-client'
+# OR
+gem 'httparty'
 
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]

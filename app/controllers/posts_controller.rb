@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+	before_action :authenticate_request
 	def index
 		puts "-------i am here --------"
 	end

@@ -30,7 +30,12 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  Rails.application.routes.default_url_options[:host] = "http://localhost:3001"
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
@@ -55,6 +60,22 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
+
+
+  config.action_mailer.delivery_method = :smtp
+  # ActionMailer::Base.perform_deliveries = true
+  # ActionMailer::Base.raise_delivery_errors = true
+  
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: 'gmail.com',
+    user_name: 'thiruhealthguru22@gmail.com',
+    password: 'vlneuklzvkzfghdy',
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
+
 
 
   # Raises error for missing translations.
